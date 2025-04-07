@@ -1,0 +1,7 @@
+if (!auth()->user())
+    return redirect()->route('login')->with('color', 'danger')->with('message', 'Login terlebih dahulu')
+$u = auth()->user()->role;
+if (!in_array($u, $roles)) {
+    abort(403, 'Anda tidak memiliki akses.');
+}
+return $next($request);
